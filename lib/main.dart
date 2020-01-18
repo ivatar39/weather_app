@@ -14,10 +14,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isLoading = true;
 
-  Future<void> loading() async {
+  void loading() async {
     Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
-
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
+    print("${position.longitude} ${position.latitude} ");
     setState(() {
       isLoading = false;
     });
