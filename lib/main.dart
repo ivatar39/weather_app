@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+
 import 'package:weather_app/pages/home_page.dart';
 import 'package:weather_app/pages/loading_page.dart';
 
@@ -12,8 +14,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool isLoading = true;
 
-  void loading() async {
-    await Future.delayed(Duration(seconds: 3));
+  Future<void> loading() async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+
     setState(() {
       isLoading = false;
     });
