@@ -1,26 +1,43 @@
 import 'dart:convert';
 
 class Weather {
-  String town;
-  String main;
-  String description;
-  num temperature;
-  num windSpeed;
+  var town, country, main, description;
+  var temperature, windSpeed, humidity, pressure, cloudiness;
 
   Weather(
-      {this.town,
-      this.description,
+      {this.country,
+      this.town,
       this.main,
+      this.description,
       this.temperature,
-      this.windSpeed});
+      this.windSpeed,
+      this.humidity,
+      this.pressure,
+      this.cloudiness});
 
   static Weather fromJson(String json) {
     final Map<String, dynamic> data = jsonDecode(json);
-    return Weather(
+
+    print(Weather(
+        country: data['sys']['country'],
         town: data['name'],
         description: data['weather'][0]['description'],
         main: data['weather'][0]['main'],
         temperature: data['main']['temp'],
-        windSpeed: data['wind']['speed']);
+        windSpeed: data['wind']['speed'],
+        humidity: data['main']['humidity'],
+        pressure: data['main']['pressure'],
+        cloudiness: data['clouds']));
+
+    return Weather(
+        country: data['sys']['country'],
+        town: data['name'],
+        description: data['weather'][0]['description'],
+        main: data['weather'][0]['main'],
+        temperature: data['main']['temp'],
+        windSpeed: data['wind']['speed'],
+        humidity: data['main']['humidity'],
+        pressure: data['main']['pressure'],
+        cloudiness: data['clouds']);
   }
 }
