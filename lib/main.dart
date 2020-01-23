@@ -3,6 +3,8 @@ import 'package:geolocator/geolocator.dart';
 
 import 'package:weather_app/pages/home_page.dart';
 import 'package:weather_app/pages/loading_page.dart';
+import 'package:weather_app/weather.dart';
+import 'package:weather_app/weather_repository.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,11 +15,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isLoading = true;
+  Weather weather = Weather();
+  weatherRepository WR = weatherRepository();
 
   void loading() async {
     Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest);
-    print("${position.longitude} ${position.latitude} ");
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
+    num lat = position.latitude;
+    num lon = position.longitude;
+    await WR.getWeather(lat, lon);
     setState(() {
       isLoading = false;
     });
@@ -32,8 +38,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Kali-Weather",
-      home: isLoading ? LoadingPage() : HomePage(),
+      title: "Weathery",
+      home: isLoading ? LoadingPage() : HomePage(weather: WR.decodedData,),
       routes: {
         '/home': ((BuildContext context) => HomePage()),
         '/loading': ((BuildContext context) => LoadingPage()),

@@ -18,7 +18,7 @@ class Weather {
     final Map<String, dynamic> data = jsonDecode(json);
     return Weather(
         town: data['name'],
-        description: data['weather'][0]['description'],
+        description:'${data['weather'][0]['description'][0].toUpperCase()}${data['weather'][0]['description'].substring(1)}',
         main: data['weather'][0]['main'],
         temperature: data['main']['temp'],
         windSpeed: data['wind']['speed']);
