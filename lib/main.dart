@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Weathery",
+      color: Colors.green,
       home: isLoading ? LoadingPage() : HomePage(weather: WR.decodedData,),
       routes: {
         '/home': ((BuildContext context) => HomePage()),
