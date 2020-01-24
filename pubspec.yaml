@@ -11,6 +11,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   geolocator: ^5.2.0
   http: ^0.12.0+4
+  font_awesome_flutter: ^8.5.0
 
 
 dev_dependencies:
@@ -19,6 +20,16 @@ dev_dependencies:
 
 
 flutter:
+  fonts:
+    - family: FontAwesome
+      fonts:
+        - asset: assets/Font_awesome.otf
+    - family: Avengers
+      fonts:
+        - asset: assets/Avengers.ttf
+    - family: Horta
+      fonts:
+        - asset: assets/Horta.ttf
 
   uses-material-design: true
 

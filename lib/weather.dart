@@ -6,13 +6,15 @@ class Weather {
   String description;
   num temperature;
   num windSpeed;
+  String country;
 
   Weather(
       {this.town,
       this.description,
       this.main,
       this.temperature,
-      this.windSpeed});
+      this.windSpeed,
+      this.country});
 
   static Weather fromJson(String json) {
     final Map<String, dynamic> data = jsonDecode(json);
@@ -21,6 +23,7 @@ class Weather {
         description:'${data['weather'][0]['description'][0].toUpperCase()}${data['weather'][0]['description'].substring(1)}',
         main: data['weather'][0]['main'],
         temperature: data['main']['temp'],
-        windSpeed: data['wind']['speed']);
+        windSpeed: data['wind']['speed'],
+    country: data['sys']['country']);
   }
 }
