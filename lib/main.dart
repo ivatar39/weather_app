@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:weather_app/pages/geo_page.dart';
 
 import 'package:weather_app/pages/home_page.dart';
 import 'package:weather_app/pages/loading_page.dart';
@@ -19,11 +20,12 @@ class _MyAppState extends State<MyApp> {
   weatherRepository WR = weatherRepository();
 
   void loading() async {
-    Position position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.bestForNavigation);
-    num lat = position.latitude;
+    Position position = await Geolocator().getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
     num lon = position.longitude;
+    num lat = position.latitude;
     await WR.getWeather(lat, lon);
+
     setState(() {
       isLoading = false;
     });
@@ -34,15 +36,21 @@ class _MyAppState extends State<MyApp> {
     loading();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Weathery",
       color: Colors.blueAccent,
-      home: isLoading ? LoadingPage() : HomePage(weather: WR.decodedData,),
+      home: isLoading
+          ? LoadingPage()
+          : HomePage(
+              weather: WR.decodedData,
+            ),
       routes: {
         '/home': ((BuildContext context) => HomePage()),
         '/loading': ((BuildContext context) => LoadingPage()),
+        '/error': ((BuildContext context) => GeoPage())
       },
     );
   }
