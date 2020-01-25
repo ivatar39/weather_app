@@ -12,6 +12,7 @@ class Weather {
   num minTemp;
   num humidity;
   num pressure;
+  num feels;
 
   Weather(
       {this.town,
@@ -24,7 +25,8 @@ class Weather {
       this.maxTemp,
       this.minTemp,
       this.humidity,
-      this.pressure});
+      this.pressure,
+      this.feels});
 
   static Weather fromJson(String json) {
     final Map<String, dynamic> data = jsonDecode(json);
@@ -40,6 +42,7 @@ class Weather {
         minTemp: data['main']['temp_min'],
         humidity: data['main']['humidity'],
         pressure: data['main']['pressure'],
-        id: data['weather'][0]['id']);
+        id: data['weather'][0]['id'],
+        feels: data['main']['feels_like']);
   }
 }

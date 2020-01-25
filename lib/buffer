@@ -1,0 +1,29 @@
+PopupMenuButton<String>(
+                icon: Icon(Icons.more_vert,color: Colors.white,),
+                onSelected: choiceAction,
+                itemBuilder: (BuildContext context) {
+                  return Constants.more.map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                },
+              )
+
+
+
+
+${widget.date.year}.${widget.date.month}.${widget.date.day}
+
+
+
+
+Padding(
+            padding: const EdgeInsets.only(left:8.0),
+            child: Column(
+            children: <Widget>[
+              Text('${(widget.weather.temperature - 273.15).toInt()}°C', style: TextStyle(fontSize: 57),),
+            ],
+      ),
+          ),
