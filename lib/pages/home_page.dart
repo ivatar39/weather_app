@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/weather.dart';
 
 import '../constants.dart';
 
 class HomePage extends StatelessWidget {
+  final Weather weather;
+
+  HomePage({this.weather});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +35,7 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Text(
-                        '5 C❄',
+                        '${(weather.temperature - 273).toInt()}°C',
                         style: TextStyle(
                             fontSize: 72,
                             color: Colors.white,
@@ -40,7 +45,7 @@ class HomePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Text(
-                        'Описание погоды. Нужно взять зонтик, не знаю',
+                        weather.main,
                         style: TextStyle(
                             fontSize: 48,
                             color: Colors.white,
