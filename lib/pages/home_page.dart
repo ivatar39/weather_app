@@ -82,19 +82,19 @@ class _HomePageState extends State<HomePage> {
         widget.weekday = 'Wednesday';
         break;
 
-      case 2:
+      case 4:
         widget.weekday = 'Thursday';
         break;
 
-      case 2:
+      case 5:
         widget.weekday = 'Friday';
         break;
 
-      case 2:
+      case 6:
         widget.weekday = 'Saturday';
         break;
 
-      case 2:
+      case 7:
         widget.weekday = 'Sunday';
         break;
     }
@@ -108,22 +108,32 @@ class _HomePageState extends State<HomePage> {
           pinned: false,
           snap: true,
           expandedHeight: 300.0,
-          title: Align(
-            alignment: Alignment.topRight,
-            child: PopupMenuButton<String>(
-              icon: Icon(
-                Icons.more_vert,
-                color: Colors.white,
-              ),
-              onSelected: choiceAction,
-              itemBuilder: (BuildContext context) {
-                return Constants.more.map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
+          title: Padding(
+            padding: const EdgeInsets.only(top:20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left:110.0),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(FontAwesomeIcons.city,
+                                color: Colors.white),
+                            Text(
+                              '  ${widget.weather.town}, ${widget.weather.country}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
           floating: true,
@@ -132,82 +142,101 @@ class _HomePageState extends State<HomePage> {
           flexibleSpace: Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 15.0),
-              child: Column(
-                children: <Widget>[
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20.0, top: 8.0),
-                        child:
-                            Icon(widget.wicon, size: 70.0, color: Colors.white),
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 35.0, right: 90.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
+              child: Container(
+                width: double.infinity,
+                child: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(left: 10.0, right: 20.0),
-                          child: Text(
-                            '${(widget.weather.temperature - 273.15).toInt()}°C',
-                            style: TextStyle(
-                                fontSize: 100.0,
-                                fontFamily: 'Horta',
-                                color: Colors.white),
+                        Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0, top: 8.0),
+                              child:
+                                  Icon(widget.wicon, size: 70.0, color: Colors.white),
+                            )),
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top:50.0),
+                            child: PopupMenuButton<String>(
+                              icon: Icon(
+                                Icons.more_vert,
+                                color: Colors.white,
+                              ),
+                              onSelected: choiceAction,
+                              itemBuilder: (BuildContext context) {
+                                return Constants.more.map((String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    child: Text(choice),
+                                  );
+                                }).toList();
+                              },
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 100.0, top: 20.0),
-                    child: Container(
-                        height: 63.0,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.cloud,
-                                    size: 12.0, color: Colors.white),
-                                Text(
-                                  ' : ${widget.weather.description}',
-                                  style: TextStyle(color: Colors.white),
-                                )
-                              ],
+                    Padding(
+                      padding: const EdgeInsets.only(top: 35.0, right: 90.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(left: 10.0, right: 20.0),
+                            child: Text(
+                              '${(widget.weather.temperature - 273.15).toInt()}°C',
+                              style: TextStyle(
+                                  fontSize: 100.0,
+                                  fontFamily: 'Horta',
+                                  color: Colors.white),
                             ),
-                            Row(
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.wind,
-                                    size: 12.0, color: Colors.white),
-                                Text(
-                                  ': ${widget.weather.windSpeed} m/s',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.city,
-                                    size: 12.0, color: Colors.white),
-                                Text(
-                                  ' : ${widget.weather.town}, ${widget.weather.country}',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            )
-                          ],
-                        )),
-                  )
-                ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 100.0),
+                      child: Container(
+                          height: 63.0,
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Icon(FontAwesomeIcons.cloud,
+                                      size: 20.0, color: Colors.white),
+                                  Text(
+                                    ' : ${widget.weather.description}',
+                                    style: TextStyle(color: Colors.white,fontSize: 20.0),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Icon(FontAwesomeIcons.wind,
+                                      size: 20.0, color: Colors.white),
+                                  Text(
+                                    ': ${widget.weather.windSpeed} m/s',
+                                    style: TextStyle(color: Colors.white,fontSize: 20.0),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )),
+                    )
+                  ],
+                ),
               ),
             ),
           )),
       SliverList(
         delegate: SliverChildListDelegate([
           Padding(
-            padding: const EdgeInsets.only(top: 40.0),
+            padding: const EdgeInsets.only(top: 25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -217,12 +246,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'RealFeel° ${(widget.weather.feels - 273.15).toInt()}°C')),
+                        'RealFeel°: ${(widget.weather.feels - 273.15).toInt()}°C', style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -232,12 +261,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'Min temperature: ${(widget.weather.minTemp - 273.15).toInt()}°C')),
+                        'Min temperature: ${(widget.weather.minTemp - 273.15).toInt()}°C', style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -247,12 +276,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'Max temperature: ${(widget.weather.maxTemp - 273.15).toInt()}°C')),
+                        'Max temperature: ${(widget.weather.maxTemp - 273.15).toInt()}°C', style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 25.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -260,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                   FontAwesomeIcons.tint,
                   color: Colors.indigo,
                 ),
-                Center(child: Text('Humidity: ${widget.weather.humidity}%')),
+                Center(child: Text('Humidity: ${widget.weather.humidity}%', style: TextStyle(fontSize: 20.0))),
               ],
             ),
           ),
@@ -278,7 +307,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                     child: Text(
-                        'Pressure: ${(widget.weather.pressure * 0.0075).toString()[0]}.${(widget.weather.pressure * 0.0075).toString()[2]}mmHg')),
+                        'Pressure: ${(widget.weather.pressure * 0.0075).toString()[0]}${(widget.weather.pressure * 0.0075).toString()[2]}${(widget.weather.pressure * 0.0075).toString()[3]}mmHg', style: TextStyle(fontSize: 20.0),)),
               ],
             ),
           )
