@@ -1,4 +1,4 @@
-# weather_app
+# Weathery
 
 A new Flutter application.
 
