@@ -7,6 +7,7 @@ class GeoPage extends StatefulWidget {
 
 class _GeoPageState extends State<GeoPage> {
   @override
+  //Пишешь что-нибудь
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('Error'),
